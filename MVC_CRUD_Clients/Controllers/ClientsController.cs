@@ -16,14 +16,42 @@ namespace MVC_CRUD_Clients.Controllers
         {
             this.context = context;
         }
+
+        [HttpGet]
         public IActionResult Index()
-        {            
-            return View();
+        {
+            return View(context.Clients.ToList());            
         }
 
-        public IActionResult AddEdit(int id=0)
+        [HttpGet]
+        public async Task<IActionResult> AddEdit(int id=0)
         {
-            return View(new Client());
+            var cliente = await context.Clients.FindAsync(id);
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEdit(Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                if (client.Id == 0)
+                    context.Add(client);
+                else
+                    context.Update(client);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(client);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var cliente = await context.Clients.FindAsync(id);
+            context.Clients.Remove(cliente);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

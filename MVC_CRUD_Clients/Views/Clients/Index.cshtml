@@ -1,6 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<MVC_CRUD_Clients.Entities.Client>
 @{
+    ViewData["Title"] = "Inicio";
 }
-hola
+<h4>Listado de Clientes</h4>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th>
+                <a class="btn btn-outline-success" asp-action="AddEdit"><i class="fa fa-plus-square"></i> Cliente</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Departamento)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.FechaIngreso)
+            </td>
+            <td>
+                <a asp-action="AddEdit" asp-route-id="@item.Id"><i class="fa fa-marker fa-lg"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1"
+                   onclick="return confirm('¿Está seguro que desea eliminar este registro?')"><i class="fa fa-trash-alt fa-lg"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
