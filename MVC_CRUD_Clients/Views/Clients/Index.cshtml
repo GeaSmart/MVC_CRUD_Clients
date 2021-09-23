@@ -2,10 +2,9 @@
 @{
     ViewData["Title"] = "Inicio";
 }
-<h4>Listado de Clientes</h4>
-<hr />
+<h4 class="mb-2">Listado de Clientes</h4>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -39,11 +38,11 @@
                 @Html.DisplayFor(model => item.Departamento)
             </td>
             <td>
-                @Html.DisplayFor(model => item.FechaIngreso)
+                @Html.DisplayFor(model => item.FechaIngreso,new { type = "date" })
             </td>
             <td>
                 <a asp-action="AddEdit" asp-route-id="@item.Id"><i class="fa fa-marker fa-lg"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1"
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-2"
                    onclick="return confirm('¿Está seguro que desea eliminar este registro?')"><i class="fa fa-trash-alt fa-lg"></i></a>
             </td>
         </tr>
