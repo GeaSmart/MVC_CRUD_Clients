@@ -55,7 +55,7 @@ namespace MVC_CRUD_Clients
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Clients}/{action=Index}/{id?}");
             });
         }
     }

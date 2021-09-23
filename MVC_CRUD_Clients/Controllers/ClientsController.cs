@@ -45,7 +45,7 @@ namespace MVC_CRUD_Clients.Controllers
             return View(client);
         }
 
-        [HttpDelete("{id:int}")]
+        
         public async Task<IActionResult> Delete(int id)
         {
             var cliente = await context.Clients.FindAsync(id);
